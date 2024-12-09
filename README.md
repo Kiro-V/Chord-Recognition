@@ -1,1 +1,1 @@
-# Chord-Recognition
+# Chord Recognition
