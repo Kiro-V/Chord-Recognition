@@ -6,6 +6,27 @@
 \usepackage{url}
 \usepackage{hyperref}
 
+% ********************************************************************
+% Hyperreferences
+% ********************************************************************
+% \hypersetup{%
+%   %draft, % hyperref's draft mode, for printing see below
+%   colorlinks=true,
+%   breaklinks=true, pdfpagemode=UseNone, pageanchor=true, pdfpagemode=UseOutlines,
+%   plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,
+%   hypertexnames=true, pdfhighlight=/O,
+%   urlcolor=webbrown, linkcolor=RoyalBlue, citecolor=webgreen
+% }
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
 \usepackage{tikz}
 
 \begin{document}
@@ -93,7 +114,7 @@ Then, the template matching procedure is to find the chord label that maximises 
 \end{equation}
 
 % Draw the flow chart with 2 nodes connect to center node leading to the output node making a shape of an Y
-\begin{figure}[t]
+\begin{figure}
     \begin{tikzpicture}
         \tikzstyle{arrow} = [thick,->,>=stealth]
 
@@ -105,8 +126,8 @@ Then, the template matching procedure is to find the chord label that maximises 
         \draw [arrow] (right) -- (center);
         \draw [arrow] (center) -- (bottom);
     \end{tikzpicture}
-    \label{figure:template_matching}
     \caption{Template Matching Process}
+    \label{figure:template_matching}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -118,13 +139,13 @@ Chord progression in music are not arbitary, but rather follow a certain rules. 
 \subsection{Markov Chains and Transition Probabilities}
 \label{subsection:Markov_chain}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In order to generalise the task \cite{manning1999foundations}, given a set of states of size $l \in N$
+In order to generalise the task, given a set of states of size $l \in N$
 
 \begin{equation}
     \mathcal{A} := \{\alpha_1, \alpha_2, \ldots, \alpha_l\},
 \end{equation}
 
-consisting of distinct elements $\alpha_i$ for $i \in [1:l]$, also known as \textbf{states}.
+consisting of distinct elements $\alpha_i$ for $i \in [1:l]$, also known as \textbf{states}.\cite{manning1999foundations}
 A chord progression can be modelled as a system that can be described at any time instances $n \in N$ by a state $S_n \in \mathcal{A}$.
 For simplicity, the system is assumed to be memoryless, this property is expressed as a conditional probability
 
@@ -198,28 +219,6 @@ Finally, the optimal state sequence is found by backtracking from the last state
 % Example for figure: Figure~\ref{figure:example}.
 
 \newpage
-
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \section{Feedback}
-% \label{section:feedback}
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-% %-----------------------
-% \begin{figure}[t]
-%     \centering
-%     \includegraphics[width=5cm]{figure_example.png}
-%     \caption{Example for a figure.}
-%     \label{figure:example}
-% \end{figure}
-% %-----------------------
-
-
-% Feedback may also be given in form of bullet points
-% \begin{itemize}
-%     \item This was good....
-%     \item I did not like...
-% \end{itemize}
 
 
 
