@@ -13,7 +13,12 @@ In general, this is a supervised learning problem where the states are the chord
 
 Dataset used: Chorale Dataset.
 
-### Template Matching
+References:
 
-## Required dependencies
+HMM on Chord Recognition: https://www.audiolabs-erlangen.de/resources/MIR/FMP/C5/C5S3_ChordRec_HMM.html
+
+Viterbi Algorithm: https://www.audiolabs-erlangen.de/resources/MIR/FMP/C5/C5S3_Viterbi.html
+
+Experiment on "Let it be": https://www.audiolabs-erlangen.de/resources/MIR/FMP/C5/C5S3_ChordRec_Beatles.html
+
 
