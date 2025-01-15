@@ -14,6 +14,7 @@ In general, this is a supervised learning problem where the states are the chord
 Dataset used: Chorale Dataset.
 
 References:
+
 Template-Based Chord Recognition: https://www.audiolabs-erlangen.de/resources/MIR/FMP/C5/C5S2_ChordRec_Templates.html
 
 HMM on Chord Recognition: https://www.audiolabs-erlangen.de/resources/MIR/FMP/C5/C5S3_ChordRec_HMM.html
