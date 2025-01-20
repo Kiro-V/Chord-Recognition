@@ -18,7 +18,8 @@ import libfmp.c4
 def split_labels(label):
     # Split the chord labels into root and quality
     if ':' not in label:
-        root = label
+        # Take first letter as root
+        root = label[0]
         quality = 'maj'
     else:
         x = label.split(':')
@@ -139,7 +140,7 @@ def viterbi_log_likelihood(A, B_O, C=None):
     """
     if C is None:
         # Assume C is uniform
-        1 / 24 * np.ones((1, 24))
+        C = 1 / 24 * np.ones((1, 24))
 
     I = A.shape[0]    # Number of states
     N = B_O.shape[1]  # Length of observation sequence
