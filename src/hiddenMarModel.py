@@ -18,8 +18,8 @@ import libfmp.c4
 def split_labels(label):
     # Split the chord labels into root and quality
     if ':' not in label:
-        # Take first letter as root
-        root = label[0]
+        # Take first letter as root or 2 letters if it's C#
+        root = label
         quality = 'maj'
     else:
         x = label.split(':')

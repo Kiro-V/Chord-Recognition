@@ -10,7 +10,7 @@ import libfmp.c4
 #   Template-based Chord Recognition Matching   #
 #################################################
 
-def compute_chromagram_from_filename(fn_wav, Fs=22050, N=4096, H=2048, gamma=None, version='STFT', norm='2'):
+def compute_chromagram_from_filename(fn_wav, Fs=22050, N=4096, H=2048, gamma=None, version='STFT', norm='2', start=0, dur = None):
     """Compute chromagram for WAV file specified by filename
 
     Notebook: C5/C5S2_ChordRec_Templates.ipynb
@@ -33,6 +33,8 @@ def compute_chromagram_from_filename(fn_wav, Fs=22050, N=4096, H=2048, gamma=Non
         x_dur (float): Duration (seconds) of audio signal
     """
     x, Fs = librosa.load(fn_wav, sr=Fs)
+    if dur is not None:
+        x = x[start*Fs:(start+dur)*Fs]
     x_dur = x.shape[0] / Fs
     if version == 'STFT':
         # Compute chroma features with STFT
