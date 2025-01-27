@@ -11,9 +11,15 @@ After the parameters are estimated, the Viterbi algorithm can be used to infer t
 
 In general, this is a supervised learning problem where the states are the chords and the observations are the audio features.
 
-Dataset used: Chorale Dataset.
+### Dataset used: 
 
-References:
+Chorale Dataset
+
+Isophonics: http://isophonics.net
+
+Piano Triads: https://www.kaggle.com/datasets/davidbroberts/piano-triads-wavset
+
+### References:
 
 Template-Based Chord Recognition: https://www.audiolabs-erlangen.de/resources/MIR/FMP/C5/C5S2_ChordRec_Templates.html
 
