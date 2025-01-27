@@ -19,7 +19,10 @@ def split_labels(label):
     # Split the chord labels into root and quality
     if ':' not in label:
         # Take first letter as root or 2 letters if it's C#
-        root = label
+        if '#' in label or 'b' in label:
+            root = label[:2]
+        else: 
+            root = label[0]
         quality = 'maj'
     else:
         x = label.split(':')
@@ -31,6 +34,8 @@ def enharmonic_compensation(label):
     # Compensate for enharmonic equivalence Eb = D#, B# = C, A# = Bb
     label = label.replace('B#', 'C')
     label = label.replace('A#', 'Bb')
+    label = label.replace('Ab', 'G#')
+    label = label.replace('Db', 'C#')
     label = label.replace('Eb', 'D#')
     return label
 
