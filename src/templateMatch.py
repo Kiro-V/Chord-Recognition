@@ -123,7 +123,7 @@ def generate_chord_templates(nonchord=False):
         chord_templates[:, shift+12] = np.roll(template_cmin, shift)
     return chord_templates
 
-def chord_recognition_template(X, norm_sim='1', nonchord=False):
+def chord_recognition_template(X, norm_sim='1', nonchord=False, templates=None):
     """Conducts template-based chord recognition
     with major, minor chords
 
@@ -138,7 +138,10 @@ def chord_recognition_template(X, norm_sim='1', nonchord=False):
         chord_sim (np.ndarray): Chord similarity matrix
         chord_max (np.ndarray): Binarized chord similarity matrix only containing maximizing chord
     """
-    chord_templates = generate_chord_templates(nonchord=nonchord)
+    if templates is not None:
+        chord_templates = templates
+    else:
+        chord_templates = generate_chord_templates(nonchord=nonchord)
     X_norm = libfmp.c3.normalize_feature_sequence(X, norm='2')
     chord_templates_norm = libfmp.c3.normalize_feature_sequence(chord_templates, norm='2')
     chord_sim = np.matmul(chord_templates_norm.T, X_norm)
@@ -152,3 +155,54 @@ def chord_recognition_template(X, norm_sim='1', nonchord=False):
 
     return chord_sim, chord_max
 
+def generate_averaged_templates():
+    '''
+    The following code uses the Piano Triads Wavset dataset to generate templates by averaging the chrome values for each chord (https://www.kaggle.com/datasets/davidbroberts/piano-triads-wavset).
+    '''
+    standard_notes = np.array(['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'])
+
+    triad_audios = librosa.util.find_files('piano_triads/')
+    triad_audios = np.asarray(triad_audios)
+
+    notes = np.array(['C', 'Cs', 'D', 'Eb', 'E', 'F', 'Fs', 'G', 'Gs', 'A', 'Bb', 'B']) # notation used in the dataset
+
+    templates = np.empty((0, 12))
+    #fig, ax = plt.subplots(8, figsize=(10,30))
+
+    # major chords:
+    for note in notes:
+        # major chords:
+        matching_files = triad_audios[np.char.find(triad_audios, note + "_maj") != -1]
+        template = np.zeros(12)
+        for i, file in enumerate(matching_files[4:]):   # discard lower octaves because they look like noise
+            x, Fs = librosa.load(file)
+            S = np.abs(librosa.stft(x[:int(1.5*Fs)]))
+            chroma = librosa.feature.chroma_stft(S=S, sr=Fs, norm=None)
+            template += np.sum(chroma, axis=-1)
+            #ax[i].set_title(file)
+            #img = librosa.display.specshow(chroma, y_axis='chroma', x_axis='time', ax=ax[i])
+        template /= np.max(template)
+        templates = np.vstack((templates, template))
+
+    # minor chords:
+    for note in notes:
+        matching_files = triad_audios[np.char.find(triad_audios, note + "_min") != -1]
+        template = np.zeros(12)
+        for i, file in enumerate(matching_files[4:]):   # discard lower octaves because they look like noise
+            x, Fs = librosa.load(file)
+            S = np.abs(librosa.stft(x[:int(1.5*Fs)]))
+            chroma = librosa.feature.chroma_stft(S=S, sr=Fs, norm=None)
+            template += np.sum(chroma, axis=-1)
+            #ax[i].set_title(file)
+            #img = librosa.display.specshow(chroma, y_axis='chroma', x_axis='time', ax=ax[i])
+        template /= np.max(template)
+        templates = np.vstack((templates, template))
+
+    
+
+    #with open('example_templates.csv', 'w', newline='') as csvfile:
+    #    writer = csv.writer(csvfile, delimiter=',')
+    #    writer.writerow(standard_notes)
+    #    writer.writerows(templates)
+
+    return templates
